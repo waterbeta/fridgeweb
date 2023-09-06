@@ -1,11 +1,11 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
+            {{ __('個人資料') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __("更新您帳戶的個人資料和電子郵件地址") }}
         </p>
     </header>
 
@@ -18,7 +18,7 @@
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('姓名')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
@@ -47,8 +47,23 @@
             @endif
         </div>
 
+        <!--update telephone -->
+        <div>
+            <x-input-label for="telephone" :value="__('電話號碼')" />
+            <x-text-input id="telephone" name="telephone" type="text" class="mt-1 block w-full" :value="old('telephone', $user->telephone)" required />
+            <x-input-error class="mt-2" :messages="$errors->get('telephone')" />
+        </div>
+
+        <!-- Display company without update functionality -->
+        <div>
+            <x-input-label :value="__('公司名稱')" />
+            <x-text-input id="company" name="company" type="text" class="mt-1 block w-full" :value="old('company', $user->company)" required />
+            <x-input-error class="mt-2" :messages="$errors->get('company')" />
+            {{-- <span class="mt-1 block w-full">{{ $user->company }}</span> --}}
+        </div>
+
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button>{{ __('儲 存') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p

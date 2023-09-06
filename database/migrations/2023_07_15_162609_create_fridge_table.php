@@ -11,15 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fridge', function (Blueprint $table) {
+        Schema::create('fridges', function (Blueprint $table) {
             $table->id();
             $table->string('name', 200)->unique();
-            $table->string('company', 200);
-            $table->integer('tel');
+            $table->string('city', 20);
+            $table->string('dist', 20);
             $table->string('address', 200);
-            $table->string('coordinate', 200);
+            $table->string('company', 200);
+            $table->string('telephone');
+            $table->string('email');
+            $table->string('coordinate', 200)->nullable();
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 
@@ -28,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fridge');
+        Schema::dropIfExists('fridges');
     }
 };

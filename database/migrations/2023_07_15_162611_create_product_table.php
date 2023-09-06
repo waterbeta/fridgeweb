@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('put_time');
             $table->string('alarm_time');
             $table->string('photo_name');
-            $table->integer('exist')->default(0);
+            $table->integer('exist')->default(0);//?
             
             $table->unsignedBigInteger('fridge_id');
-            $table->foreign('fridge_id')->references('id')->on('fridge')->onDelete('cascade');
+            $table->foreign('fridge_id')->references('id')->on('fridges')->onDelete('cascade');//?
 
             $table->timestamps();
         });
