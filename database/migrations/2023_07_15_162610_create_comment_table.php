@@ -17,6 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('fridge_id')->nullable(false);
             $table->integer('solve')->default(0);
             $table->foreign('fridge_id')->references('id')->on('fridges');
+
+            $table->timestamps(0);
         });
     }
 

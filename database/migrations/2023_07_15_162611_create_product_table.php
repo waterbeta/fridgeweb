@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('product', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('kind');
             $table->integer('num');
             $table->string('put_time');
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('fridge_id');
             $table->foreign('fridge_id')->references('id')->on('fridges')->onDelete('cascade');//?
 
-            $table->timestamps();
+            $table->timestamps(0);
         });
     }
 

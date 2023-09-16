@@ -2,8 +2,9 @@
 
 @section('content')
     <script>
-        function send_address(address) {
-            parent.postMessage(address);
+        function send_address(city, dist, address) {
+            map_address = city + dist + address;
+            parent.postMessage(map_address);
         }
     </script>
 
@@ -14,9 +15,9 @@
                 <td>
                     <a href="{{ route('fridgedetail', ['id' => $fridge['id']]) }}" target="_parent">{{ $fridge['name'] }}</a>
                 </td>
-                <td>{{ $fridge['address'] }}</td>
+                <td>{{ $fridge['city'] }}{{ $fridge['dist'] }}{{ $fridge['address'] }}</td>
                 <td>
-                    <button onclick="send_address('{{ $fridge['address'] }}')">地圖</button>
+                    <button onclick="send_address('{{ $fridge['city'] }}', '{{ $fridge['dist'] }}', '{{ $fridge['address'] }}')">地圖</button>
                 </td>
             </tr>
         @empty
