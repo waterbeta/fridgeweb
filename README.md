@@ -1,10 +1,11 @@
 # fridgeweb 
 
-## 2023/09/16
-將進度整合
-1. 未登入查詢冰箱地圖
-2. 未登入查看冰箱資料/食物
-3. 註冊
-4. 登入管理資料
-5. 登入新增/編輯冰箱
-6. 登入管理冰箱食物
+## 啟動方式: 
+
+### Laravel
+1. docker desktop 選擇fridgeweb後啟動即可
+2. terminal > ./vender/bin/sail up
+
+### 監聽
+./sh start.sh
+
