@@ -24,29 +24,30 @@
         <div class="bg-white overflow-hidden shadow rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-6 text-gray-900">
                 <h2 style="font-size:25px;"><strong>冰箱食物</strong></h2></br>
-                <table>
-                <th>名稱</th><th>種類</th><th>數量</th><th>放入時間</th><th>過期時間</th>
-                @forelse($products as $product)
-                <tr>
-                    <td>{{ $product['name'] }}</td>
-                    <td>{{ $product['kind'] }}</td>
-                    <td>{{ $product['num'] }}</td>
-                    <td>{{ $product['put_time'] }}</td>
-                    <td>{{ $product['alarm_time'] }}</td>
-                    <td>
-                        <form method="POST" action="{{ route('content.update', ['fridgeId' => $fridge['id'], 'productId' => $product['id'] ]) }}">
-                            @csrf
-                            @method('PATCH')
-                            <!-- Add your form fields and other content here -->
-                            <button type="submit">刪除</button>
-                        </form>
-                    </td>
-                </tr>
-            @empty
-                <tr><td colspan="4">目前冰箱內沒有食物</td></tr>
-            @endforelse
-
-                </table>
+                    <table cellpadding="5">
+                        <th>名稱</th><th>種類</th><th>數量</th><th>放入時間</th><th>過期時間</th>
+                        @forelse($products as $product)
+                        <tr>
+                            <td align="center">{{ $product['name'] }}</td>
+                            <td align="center">{{ $product['kind'] }}</td>
+                            <td align="center">{{ $product['num'] }}</td>
+                            <td align="center">{{ $product['put_time'] }}</td>
+                            <td align="center">{{ $product['alarm_time'] }}</td>
+                            <td align="center"><img src="{{ asset('photos/'.$product['photo_name']) }}" width="40%" height="40%"></td>
+                            <td align="center">
+                                <form method="POST" action="{{ route('content.update', ['fridgeId' => $fridge['id'], 'productId' => $product['id'] ]) }}">
+                                    @csrf
+                                    @method('PATCH')
+                                    <!-- Add your form fields and other content here -->
+                                    <button type="submit">刪除</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr><td colspan="4">目前冰箱內沒有食物</td></tr>
+                        @endforelse
+    
+                    </table>
             </div>
         </div>
     </div>

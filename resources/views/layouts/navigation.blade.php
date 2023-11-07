@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('welcome') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
@@ -36,6 +36,11 @@
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('檔案') }}
+                        </x-dropdown-link>
+
+                        <!-- 新增回到 welcome.blade.php 的連結 -->
+                        <x-dropdown-link :href="route('dashboard')">
+                            {{ __('儀表板') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->

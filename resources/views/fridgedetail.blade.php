@@ -16,7 +16,10 @@
         </style>
     </head>
     <body class="antialiased">
+        
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+
+            
             @if (Route::has('login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                     @auth
@@ -55,18 +58,19 @@
                             <div class="bg-white overflow-hidden shadow rounded-lg">
                                 <div class="p-6 text-gray-900">
                                     <h2 style="font-size:25px;"><strong>冰箱食物</strong></h2></br>
-                                    <table>
-                                    <th>名稱</th><th>種類</th><th>數量</th><th>放入時間</th>
-                                    @forelse($products as $product)
-                                        <tr>
-                                            <td>{{ $product['name'] }}</td>
-                                            <td>{{ $product['kind'] }}</td>
-                                            <td>{{ $product['num'] }}</td>
-                                            <td>{{ $product['put_time'] }}</td>
-                                        </tr>
-                                    @empty
-                                        <tr><td colspan="4">目前冰箱內沒有食物</td></tr>
-                                    @endforelse
+                                    <table cellpadding="5">
+                                        <th>名稱</th><th>種類</th><th>數量</th><th>放入時間</th>
+                                        @forelse($products as $product)
+                                            <tr>
+                                                <td align="center">{{ $product['name'] }}</td>
+                                                <td align="center">{{ $product['kind'] }}</td>
+                                                <td align="center">{{ $product['num'] }}</td>
+                                                <td align="center">{{ $product['put_time'] }}</td>
+                                                <td align="center"><img src="{{ asset('photos/'.$product['photo_name']) }}" width="40%" height="40%"></td>
+                                            </tr>
+                                        @empty
+                                            <tr><td colspan="4">目前冰箱內沒有食物</td></tr>
+                                        @endforelse
                                     </table>
                                 </div>
                             </div>
@@ -77,8 +81,17 @@
                                 <div class="p-6 text-gray-900">
                                     <h2 style="font-size:25px;"><strong>使用者回報</strong></h2>
                                     <p class="mt-1 text-sm text-gray-600">是否發現冰箱與網站資料不符？回報給管理員知道！</p><br>
-                                    <textarea type="text" name="content" style="width:50%; height:100px; border:1.5px black solid; border-radius: 5px;" required></textarea><br>
-                                    <input type="submit" value="送出"><br>
+                                    <form name="comment" action="{{ route('comment', ['id' => $fridge['id']]) }}" method="post">
+                                        @csrf
+                                        <textarea type="text" name="content" style="width:50%; height:100px; border:1.5px black solid; border-radius: 5px;" required></textarea><br>
+                                        <input type="submit" value="送出" onclick="return confirm('已確認回報內容嗎？')"><br>
+                                    </form>
+                                    <script>
+                                        var msg = '{{Session::get('alert')}}';
+                                        var exist = '{{Session::has('alert')}}';
+                                        if(exist)
+                                            alert(msg);
+                                    </script>
                                 </div>
                             </div>
                         </div>
