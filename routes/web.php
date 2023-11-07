@@ -23,6 +23,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/welcome', function () {
+    return view('welcome');
+})->name('welcome');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -36,6 +40,10 @@ Route::middleware('auth')->group(function () {
     Route::post('add', [AddFridgeController::class, 'store']);
 
     Route::get('show', [ShowController::class, 'edit'])->name('show');
+    Route::get('showcomment', [ShowController::class, 'showcomment'])->name('showcomment');
+    Route::get('solved', [ShowController::class, 'solved'])->name('solved');
+    Route::get('solvedcomment', [ShowController::class, 'solvedcomment'])->name('solvedcomment');
+    Route::get('expiredproduct', [ShowController::class, 'expiredproduct'])->name('expiredproduct');
 
     Route::get('/show/edit/{fridgeId}', [FridgeEditController::class, 'edit'])->name('fridgeedit.edit');
     Route::patch('/show/edit/{fridgeId}', [FridgeEditController::class, 'update'])->name('fridgeedit.update');
@@ -47,5 +55,6 @@ Route::middleware('auth')->group(function () {
 
 Route::post('/selecttable', [FridgeController::class, 'selectTable'])->name('selecttable');
 Route::get('/fridgedetail', [FridgeController::class, 'detail'])->name('fridgedetail');
+Route::post('/comment', [FridgeController::class, 'comment'])->name('comment');
 
 require __DIR__.'/auth.php';

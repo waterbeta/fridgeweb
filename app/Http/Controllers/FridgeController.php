@@ -22,10 +22,18 @@ class FridgeController extends Controller
         $sql = $pdo->prepare('select * from fridges where id=?');
         $sql->execute([$request->input('id')]);
         $fridges = $sql->fetchAll();
-        $sql = $pdo->prepare('select * from product where fridge_id=? order by alarm_time desc');
-        $sql->execute([$request->input('id')]);
+        $sql = $pdo->prepare('select * from product where fridge_id=? and exist=? order by alarm_time desc');
+        $sql->execute([$request->input('id'), 1]);
         $products = $sql->fetchAll();
 
         return view('fridgedetail', compact('fridges', 'products'));
+    }
+
+    public function comment(Request $request)
+    {
+        $pdo = new PDO('mysql:host=mysql; dbname=fridgeweb; charset=utf8', 'sail', 'password');
+        $sql = $pdo->prepare('insert into comment values(null, ?, ?, default, ?, ?)');
+        if($sql->execute([htmlspecialchars($request->input('content')), $request->input('id'), now(), now()]))
+            return redirect()->back() ->with('alert', '回報成功！');
     }
 }
